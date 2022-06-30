@@ -56,16 +56,6 @@ raw.head()
 # Splitting Data
 X = raw.message.values
 y = raw.sentiment.values
-X_vect = tweet_cv.transform([X]).toarray()
-
-X_train, X_test, y_train, y_test = train_test_split(X_vect, y, test_size=0.20, random_state=42)
-
-#Initialising and fitting models with training data
-lsvc = SVC()
-lsvc.fit(X_train,y_train)
-
-lr = LogisticRegression()
-lr.fit(X_train,y_train)
 
 
 def load_prediction_models(model_file):
@@ -92,7 +82,7 @@ def main():
 	if selection == "Information":
 		st.info("General Information")
 		# You can read a markdown file from supporting resources folder
-		st.markdown("In this app we will be classifying twitter sentiments around climate change. For the sake of transparency we have shared the data upon which our algorithms have train ")
+		st.markdown("In this app we will be classifying twitter sentiments around climate change. For the sake of transparency we have shared the data upon which our algorithms have trained ")
 
 		st.subheader("Raw Twitter data and label")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
