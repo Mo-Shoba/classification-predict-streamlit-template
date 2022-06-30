@@ -27,6 +27,11 @@ import joblib,os
 
 # Data dependencies
 import pandas as pd
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 import streamlit as st
 import pandas as pd
 import matplotlib
@@ -46,6 +51,20 @@ tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl f
 # Load your raw data
 raw = pd.read_csv("resources/train.csv")
 raw.head()
+
+# Splitting Data
+X = raw.message.values
+y = raw.sentiment.values
+X_vect = tweet_cv.transform([X]).toarray()
+
+X_train, X_test, y_train, y_test = train_test_split(X_vect, y, test_size=0.20, random_state=42)
+
+#Initialising and fitting models with training data
+lsvc = SVC()
+lsvc.fit(X_train,y_train)
+
+lr = LogisticRegression()
+lr.fit(X_train,y_train)
 
 
 def load_prediction_models(model_file):
