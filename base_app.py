@@ -23,15 +23,10 @@
 """
 # Streamlit dependencies
 import streamlit as st
-import os
+import joblib,os
 
 # Data dependencies
 import pandas as pd
-from sklearn.pipeline import Pipeline
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.svm import SVC
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 import streamlit as st
 import pandas as pd
 import matplotlib
@@ -52,9 +47,6 @@ tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl f
 raw = pd.read_csv("resources/train.csv")
 raw.head()
 
-# Splitting Data
-X = raw.message.values
-y = raw.sentiment.values
 
 def load_prediction_models(model_file):
 	loaded_model = joblib.load(open(os.path.join(model_file),"rb"))
@@ -157,7 +149,6 @@ def main():
 			plt.imshow(wordcloud,interpolation='bilinear')
 			plt.axis("off")
 			st.pyplot()
-		st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 
