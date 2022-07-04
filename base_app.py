@@ -36,6 +36,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
 import numpy as np
 import spacy
+nlp = spacy.load('en_core_web_sm')
 
 # Vectorizer
 news_vectorizer = open("resources/vectorizer (2).pkl","rb")
